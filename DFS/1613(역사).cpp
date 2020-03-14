@@ -63,7 +63,7 @@ void dfs(int from, int to) {
 			}
 			visited[next] = 1;
 			dfs(next, to);
-			visited[next] = 10;
+			//visited[next] = 10;
 		}
 	}
 }

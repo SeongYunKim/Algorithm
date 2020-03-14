@@ -20,6 +20,7 @@ int main() {
 		line[to][from] = 1;
 		line[from][to] = 1;
 	}
+	dfs_visited[V] = 1;
 	dfs(V);
 	printf("\n");
 	bfs();
@@ -51,10 +52,11 @@ void bfs() {
 
 void dfs(int cur) {
 	printf("%d ", cur);
-	dfs_visited[cur] = 1;
+	//dfs_visited[cur] = 1;
 	for (int i = 1; i <= N; i++) {
 		if (line[cur][i] == 1) {
 			if (dfs_visited[i] == 0) {
+				dfs_visited[i] = 1;
 				dfs(i);
 			}
 		}
