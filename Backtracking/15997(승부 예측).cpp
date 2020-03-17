@@ -60,6 +60,7 @@ void backtracking(int cnt) {
 			}
 		}
 
+		/*
 		int cnt = 2;
 		for (int i = 0; i < 4; i++) {
 			temp_v.push_back({ team_point[i], i });
@@ -79,8 +80,9 @@ void backtracking(int cnt) {
 			}
 			cnt -= num;
 		}
+		*/
 
-		/*
+
 		for (int i = 0; i < 4; i++) {
 			temp_v.push_back({ team_point[i], i });
 		}
@@ -90,15 +92,15 @@ void backtracking(int cnt) {
 		if (temp_v[1].first == temp_v[2].first) {
 			if (temp_v[2].first == temp_v[3].first) {
 				if (temp_v[0].first == temp_v[1].first) {
-					result[0] += (basic_prob / 4);
-					result[1] += (basic_prob / 4);
-					result[2] += (basic_prob / 4);
-					result[3] += (basic_prob / 4);
+					result[0] += (basic_prob / 4) * 2;
+					result[1] += (basic_prob / 4) * 2;
+					result[2] += (basic_prob / 4) * 2;
+					result[3] += (basic_prob / 4) * 2;
 				}
 				else {
-					result[temp_v[1].second] += (basic_prob / 3);
-					result[temp_v[2].second] += (basic_prob / 3);
-					result[temp_v[3].second] += (basic_prob / 3);
+					result[temp_v[1].second] += (basic_prob / 3) * 2;
+					result[temp_v[2].second] += (basic_prob / 3) * 2;
+					result[temp_v[3].second] += (basic_prob / 3) * 2;
 				}
 			}
 			else if (temp_v[0].first == temp_v[1].first) {
@@ -117,7 +119,7 @@ void backtracking(int cnt) {
 			result[temp_v[2].second] += basic_prob;
 			result[temp_v[3].second] += basic_prob;
 		}
-		*/
+
 
 		return;
 	}
