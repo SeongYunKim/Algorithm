@@ -1,3 +1,10 @@
+/*
+날짜: 2020-01-22
+분류: Backtracking 완전탐색
+TIP: map.insert({ key, value })
+	 내림차순으로 sort: bool cmp(type A, type B) { return A > B; }
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -60,11 +67,11 @@ void backtracking(int cnt) {
 			}
 		}
 
-		/*
-		int cnt = 2;
 		for (int i = 0; i < 4; i++) {
 			temp_v.push_back({ team_point[i], i });
 		}
+
+		int cnt = 2;
 		while (cnt > 0) {
 			int num = 0;
 			sort(temp_v.begin(), temp_v.end(), cmp);
@@ -75,18 +82,19 @@ void backtracking(int cnt) {
 				}
 			}
 			for (int i = 0; i < num; i++) {
-				result[temp_v[i].second] += basic_prob / num;
+				if (cnt < num) {
+					result[temp_v[i].second] += basic_prob / num * cnt;
+				}
+				else {
+					result[temp_v[i].second] += basic_prob;
+				}
+
 				temp_v[i].first = -1;
 			}
 			cnt -= num;
 		}
-		*/
 
-
-		for (int i = 0; i < 4; i++) {
-			temp_v.push_back({ team_point[i], i });
-		}
-
+		/*
 		sort(temp_v.begin(), temp_v.end());
 
 		if (temp_v[1].first == temp_v[2].first) {
@@ -119,7 +127,7 @@ void backtracking(int cnt) {
 			result[temp_v[2].second] += basic_prob;
 			result[temp_v[3].second] += basic_prob;
 		}
-
+		*/
 
 		return;
 	}
