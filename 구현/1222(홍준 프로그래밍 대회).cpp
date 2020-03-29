@@ -1,3 +1,10 @@
+/*
+날짜: 2020-03-26
+분류: 구현, 최적화
+TIP: 약수를 구할 때 나눠지는 수를 순회하며 나눠가는 것 보다
+	 나누는 수를 순회하며 나누는 수를 더하면서 하는 것이 효율적일 때도 있다.
+*/
+
 #include <iostream>
 #define SCHOOL_MAX 200001
 #define STUDENT_MAX 2000001
@@ -18,13 +25,6 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		scanf("%d", &student[i]);
 		team[student[i]]++;
-		/*
-		for (int j = 1; j <= student[i]; j++) {
-			if (student[i] % j == 0) {
-				team[j] += j;
-			}
-		}
-		*/
 	}
 
 	for (int i = 1; i < STUDENT_MAX; i++) {
