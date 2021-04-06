@@ -13,7 +13,6 @@
 using namespace std;
 int dice[10] = {0};
 int combination[10] = {0};
-int currentPosition[4] = {0};
 int maxScore = 0;
 int boardScore[33] = {0};
 int nextBoardPosition[32] = {0};
@@ -22,30 +21,35 @@ map<int, int> specialNextBoardPosition;
 void dfs(int cnt) {
     if (cnt == 10) {
         // 실수 포인트. currentPosition을 초기화 해주지 않았음 => 초기화가 필요한 변수는 전역변수로 선언하지 말 것!
+        int currentPosition[4] = {0};
+        bool occupation[33] = {false};
         for (int i = 0; i < 4; i++)
             currentPosition[i] = 0;
         int score = 0;
         for (int i = 0; i < 10; i++) {
             int beforeMovePosition = currentPosition[combination[i]];
+            int afterMovePosition = beforeMovePosition;
             if (beforeMovePosition == 32)
                 return;
+            occupation[beforeMovePosition] = false;
             for (int j = 0; j < dice[i]; j++) {
                 // 파란색 칸에서 이동을 시작할 경우
-                if (j == 0 && specialNextBoardPosition.find(beforeMovePosition) != specialNextBoardPosition.end())
-                    beforeMovePosition = specialNextBoardPosition[beforeMovePosition];
+                if (j == 0 && specialNextBoardPosition.find(afterMovePosition) != specialNextBoardPosition.end())
+                    afterMovePosition = specialNextBoardPosition[afterMovePosition];
                 else
-                    beforeMovePosition = nextBoardPosition[beforeMovePosition];
-                if (beforeMovePosition == 32)
+                    afterMovePosition = nextBoardPosition[afterMovePosition];
+                if (afterMovePosition == 32)
                     break;
             }
             // 이동 마친 칸에 다른 말이 있으면 말을 고를 수 없음(도착 칸 제외)
-            if (beforeMovePosition != 32) {
-                for (int j = 0; j < 4; j++) {
-                    if (currentPosition[j] == beforeMovePosition && j != combination[i])
-                        return;
+            if (afterMovePosition != 32) {
+                if (occupation[afterMovePosition]) {
+                    occupation[beforeMovePosition] = true;
+                    return;
                 }
             }
-            currentPosition[combination[i]] = beforeMovePosition;
+            currentPosition[combination[i]] = afterMovePosition;
+            occupation[afterMovePosition] = true;
             score += boardScore[currentPosition[combination[i]]];
         }
         if (score > maxScore)
