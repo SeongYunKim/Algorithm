@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cstring>
 
 #define INF 1e9
 
@@ -28,15 +29,8 @@ int main() {
     cin.tie(NULL);
     cin >> T;
     while (T--) {
-        for (int i = 0; i < 102; i++) {
-            for (int j = 0; j < 102; j++) {
-                for (int k = 0; k < 204; k++) {
-                    dp[i][j][k][0] = INF;
-                    dp[i][j][k][1] = INF;
-                }
-            }
-        }
         int result = INF;
+        memset(dp, 0x7f, sizeof dp);
         dp[0][0][0][0] = 0;
         dp[0][0][0][1] = 1;
         cin >> M >> N >> L >> G;
